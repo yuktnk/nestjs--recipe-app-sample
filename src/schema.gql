@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Recipe {
+  id: Int!
+  name: String!
+  discription: String
+  serving: Int!
+  status: String!
+}
+
+type Query {
+  getRecipes: [Recipe]!
+}
