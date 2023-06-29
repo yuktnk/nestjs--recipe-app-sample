@@ -9,7 +9,7 @@ export class Recipe {
   name: string;
 
   @Field({ nullable: true })
-  discription: string;
+  description: string;
 
   @Field(() => Int)
   serving: number; // ◯人前

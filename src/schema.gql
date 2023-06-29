@@ -5,11 +5,15 @@
 type Recipe {
   id: Int!
   name: String!
-  discription: String
+  description: String
   serving: Int!
   status: String!
 }
 
 type Query {
   getRecipes: [Recipe]!
+}
+
+type Mutation {
+  createRecipe(name: String!, serving: Int!, description: String): Recipe!
 }

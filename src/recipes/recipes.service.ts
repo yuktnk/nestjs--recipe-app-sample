@@ -1,4 +1,4 @@
-import { Injectable, RequestTimeoutException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Recipe } from './models/recipe.model';
 
 @Injectable()
@@ -6,15 +6,19 @@ export class RecipesService {
   recipes: Recipe[] = [];
 
   getRecipes(): Recipe[] {
-    const recipe01 = new Recipe();
-    recipe01.id = 1;
-    recipe01.name = '焼きうどん';
-    recipe01.serving = 2;
-    recipe01.status = 'PUBLISHED';
-    recipe01.discription = '説明文です説明文です説明文です説明文です説明文です';
-
-    this.recipes.push(recipe01);
-
     return this.recipes;
+  }
+
+  createRecipe(name: string, serving: number, description?: string): Recipe {
+    const newRecipe = new Recipe();
+    newRecipe.id = this.recipes.length + 1;
+    newRecipe.name = name;
+    newRecipe.serving = serving;
+    newRecipe.status = 'PUBLISHED';
+    newRecipe.description = description;
+
+    this.recipes.push(newRecipe);
+
+    return newRecipe;
   }
 }
