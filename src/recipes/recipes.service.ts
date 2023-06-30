@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Recipe } from './models/recipe.model';
-import { CreateRecipeInput } from './dto/createRecipe.input';
+import { CreateRecipeDto } from './dto/createRecipe.dto';
 
 @Injectable()
 export class RecipesService {
@@ -10,8 +10,8 @@ export class RecipesService {
     return this.recipes;
   }
 
-  createRecipe(createRecipeInput: CreateRecipeInput): Recipe {
-    const { name, serving, description } = createRecipeInput;
+  createRecipe(createRecipeDto: CreateRecipeDto): Recipe {
+    const { name, serving, description } = createRecipeDto;
     const newRecipe = new Recipe();
     newRecipe.id = this.recipes.length + 1;
     newRecipe.name = name;

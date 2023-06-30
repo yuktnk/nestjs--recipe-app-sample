@@ -15,10 +15,10 @@ type Query {
 }
 
 type Mutation {
-  createRecipe(createRecipeInput: CreateRecipeInput!): Recipe!
+  createRecipe(createRecipeDto: CreateRecipeDto!): Recipe!
 }
 
-input CreateRecipeInput {
+input CreateRecipeDto {
   name: String!
   serving: Int!
   description: String
