@@ -1,0 +1,13 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Prismaクライアントの生成方法を指定
+generator client {
+  provider = "prisma-client-js"
+}
+
+// データベースの接続情報
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
