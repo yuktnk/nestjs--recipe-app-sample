@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Status } from '@prisma/client';
 
 @ObjectType()
 export class Recipe {
@@ -15,5 +16,11 @@ export class Recipe {
   serving: number; // ◯人前
 
   @Field()
-  status: 'PUBLISHED' | 'PRIVATE' | 'DRAFT';
+  status: Status;
+
+  @Field()
+  createdAt: Date;
+
+  @Field()
+  updatedAt: Date;
 }

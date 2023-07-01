@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { Recipe } from './models/recipe.model';
 import { CreateRecipeDto } from './dto/createRecipe.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Recipe } from '@prisma/client';
 
 @Injectable()
 export class RecipesService {
-  recipes: Recipe[] = [];
+  constructor(private readonly prismaService: PrismaService) {}
 
-  getRecipes(): Recipe[] {
-    return this.recipes;
+  async getRecipes(): Promise<Recipe[]> {
+    return await this.prismaService.recipe.findMany();
   }
 
-  createRecipe(createRecipeDto: CreateRecipeDto): Recipe {
+  async createRecipe(createRecipeDto: CreateRecipeDto): Promise<Recipe> {
     const { name, serving, description } = createRecipeDto;
-    const newRecipe = new Recipe();
-    newRecipe.id = this.recipes.length + 1;
-    newRecipe.name = name;
-    newRecipe.serving = serving;
-    newRecipe.status = 'PUBLISHED';
-    newRecipe.description = description;
 
-    this.recipes.push(newRecipe);
-
-    return newRecipe;
+    return await this.prismaService.recipe.create({
+      data: {
+        name,
+        serving,
+        description,
+      },
+    });
   }
 }
