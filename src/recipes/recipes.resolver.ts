@@ -1,21 +1,22 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { RecipesService } from './recipes.service';
-import { Recipe } from './models/recipe.model';
+import { Recipe as TaskModel } from './models/recipe.model';
 import { CreateRecipeDto } from './dto/createRecipe.dto';
+import { Recipe } from '@prisma/client';
 
 @Resolver()
 export class RecipesResolver {
   constructor(private readonly recipeService: RecipesService) {}
 
-  @Query(() => [Recipe], { nullable: 'items' })
-  getRecipes(): Recipe[] {
-    return this.recipeService.getRecipes();
+  @Query(() => [TaskModel], { nullable: 'items' })
+  async getRecipes(): Promise<Recipe[]> {
+    return await this.recipeService.getRecipes();
   }
 
-  @Mutation(() => Recipe)
-  createRecipe(
+  @Mutation(() => TaskModel)
+  async createRecipe(
     @Args('createRecipeDto') createRecipeDto: CreateRecipeDto,
-  ): Recipe {
-    return this.recipeService.createRecipe(createRecipeDto);
+  ): Promise<Recipe> {
+    return await this.recipeService.createRecipe(createRecipeDto);
   }
 }
