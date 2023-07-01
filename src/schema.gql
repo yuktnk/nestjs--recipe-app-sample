@@ -23,10 +23,19 @@ type Query {
 
 type Mutation {
   createRecipe(createRecipeDto: CreateRecipeDto!): Recipe!
+  updateRecipe(updateRecipeDto: UpdateRecipeDto!): Recipe!
 }
 
 input CreateRecipeDto {
   name: String!
   serving: Int!
   description: String
+}
+
+input UpdateRecipeDto {
+  id: Int!
+  name: String
+  serving: Int
+  description: String
+  status: String
 }

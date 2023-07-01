@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateRecipeDto } from './dto/createRecipe.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Recipe } from '@prisma/client';
+import { UpdateRecipeDto } from './dto/updateRecipe.dto';
 
 @Injectable()
 export class RecipesService {
@@ -20,6 +21,20 @@ export class RecipesService {
         serving,
         description,
       },
+    });
+  }
+
+  async updateRecipe(updateRecipeDto: UpdateRecipeDto): Promise<Recipe> {
+    const { id, name, serving, status, description } = updateRecipeDto;
+
+    return await this.prismaService.recipe.update({
+      data: {
+        name,
+        serving,
+        status,
+        description,
+      },
+      where: { id },
     });
   }
 }
