@@ -37,4 +37,10 @@ export class RecipesService {
       where: { id },
     });
   }
+
+  async deleteRecipe(id: number): Promise<Recipe> {
+    return await this.prismaService.recipe.delete({
+      where: { id },
+    });
+  }
 }

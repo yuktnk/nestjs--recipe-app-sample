@@ -1,4 +1,4 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { RecipesService } from './recipes.service';
 import { Recipe as RecipeModel } from './models/recipe.model';
 import { CreateRecipeDto } from './dto/createRecipe.dto';
@@ -26,5 +26,12 @@ export class RecipesResolver {
     @Args('updateRecipeDto') updateRecipeDto: UpdateRecipeDto,
   ): Promise<Recipe> {
     return await this.recipeService.updateRecipe(updateRecipeDto);
+  }
+
+  @Mutation(() => RecipeModel)
+  async deleteRecipe(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Recipe> {
+    return await this.recipeService.deleteRecipe(id);
   }
 }
